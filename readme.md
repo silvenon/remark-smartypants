@@ -25,7 +25,8 @@ console.log(String(content))
 const mdx = require('@mdx-js/mdx')
 const smartypants = require('@silvenon/remark-smartypants')
 
-const result = mdx('# "Hello World!"', {
+// let's pretend that support for top-level async/await exists...
+const result = await mdx('# "Hello World!"', {
   remarkPlugins: [
     smartypants,
   ],
