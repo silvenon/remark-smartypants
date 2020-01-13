@@ -10,7 +10,13 @@ npm install @silvenon/remark-smartypants
 const remark = require('remark')
 const smartypants = require('@silvenon/remark-smartypants')
 
-const file =
+const content = remark()
+  .use(smartypants)
+  .processSync('# "Hello World!"')
+
+console.log(String(content))
+// # “Hello World!”
+// (notice smart quotes)
 ```
 
 [remark]: https://remark.js.org
