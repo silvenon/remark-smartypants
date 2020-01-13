@@ -19,5 +19,19 @@ console.log(String(content))
 // (notice smart quotes)
 ```
 
+"Why?" I hear nobody ask. Because I wanted to implement SmartyPants in [MDX]:
+
+```js
+const mdx = require('@mdx-js/mdx')
+const smartypants = require('@silvenon/remark-smartypants')
+
+const result = mdx('# "Hello World!"', {
+  remarkPlugins: [
+    smartypants,
+  ],
+})
+```
+
 [remark]: https://remark.js.org
 [SmartyPants]: https://daringfireball.net/projects/smartypants
+[MDX]: https://mdxjs.com
