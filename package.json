@@ -1,0 +1,27 @@
+{
+  "name": "@silvenon/remark-smartypants",
+  "description": "remark plugin to implement SmartyPants",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "prepublishOnly": "yarn test"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn test"
+    }
+  },
+  "dependencies": {
+    "retext": "^7.0.1",
+    "retext-smartypants": "^3.0.3",
+    "unist-util-visit": "^2.0.1"
+  },
+  "devDependencies": {
+    "husky": "^4.0.7",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "remark": "^11.0.2"
+  }
+}
