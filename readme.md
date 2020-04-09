@@ -33,6 +33,14 @@ const result = await mdx('# "Hello World!"', {
 })
 ```
 
+This plugin uses [retext-smartypants](https://github.com/retextjs/retext-smartypants) under the hood, so it takes the same options:
+
+```js
+const content = remark()
+  .use(smartypants, { dashes: 'oldschool' })
+  .processSync('en dash (--), em dash (---)')
+```
+
 [remark]: https://remark.js.org
 [SmartyPants]: https://daringfireball.net/projects/smartypants
 [MDX]: https://mdxjs.com
