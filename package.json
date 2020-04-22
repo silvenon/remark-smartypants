@@ -8,6 +8,29 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/silvenon/remark-smartypants.git"
+  },
+  "author": {
+    "name": "Matija Marohnić",
+    "email": "matija.marohnic@gmail.com",
+    "url": "https://silvenon.com"
+  },
+  "homepage": "https://github.com/silvenon/remark-smartypants#readme",
+  "bugs": {
+    "url": "https://github.com/silvenon/remark-smartypants/issues",
+    "email": "matija.marohnic@gmail.com"
+  },
+  "keywords": [
+    "unified",
+    "remark",
+    "remark-plugin",
+    "smartypants",
+    "punctuation",
+    "typography",
+    "smart"
+  ],
   "scripts": {
     "test": "jest",
     "prepublishOnly": "yarn test"
