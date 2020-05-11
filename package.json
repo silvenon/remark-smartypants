@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "husky": "^4.0.7",
-    "jest": "^25.3.0",
+    "jest": "^26.0.1",
     "prettier": "^2.0.4",
     "remark": "^12.0.0"
   }
