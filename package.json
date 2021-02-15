@@ -46,7 +46,7 @@
     "unist-util-visit": "^2.0.1"
   },
   "devDependencies": {
-    "husky": "^4.0.7",
+    "husky": "^5.0.9",
     "jest": "^26.0.1",
     "prettier": "^2.0.4",
     "remark": "^13.0.0"
