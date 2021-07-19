@@ -41,7 +41,7 @@
     }
   },
   "dependencies": {
-    "retext": "^7.0.1",
+    "retext": "^8.0.0",
     "retext-smartypants": "^4.0.0",
     "unist-util-visit": "^2.0.1"
   },
