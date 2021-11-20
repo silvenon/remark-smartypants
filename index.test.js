@@ -1,5 +1,5 @@
-const remark = require("remark");
-const smartypants = require("./");
+import { remark } from "remark";
+import smartypants from "./";
 
 it("implements SmartyPants", () => {
   const file = remark()

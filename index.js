@@ -1,6 +1,6 @@
-const retext = require('retext')
-const visit = require('unist-util-visit')
-const smartypants = require('retext-smartypants')
+import { retext } from 'retext'
+import { visit } from 'unist-util-visit'
+import smartypants from 'retext-smartypants'
 
 const remarkSmartypants = options => {
   const processor = retext().use(smartypants, options)
@@ -12,4 +12,4 @@ const remarkSmartypants = options => {
   return transformer
 }
 
-module.exports = remarkSmartypants
+export default remarkSmartypants
