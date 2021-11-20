@@ -12,7 +12,7 @@ import smartypants from 'retext-smartypants'
  *
  * @type {import('unified').Plugin<[Options?] | void[], Root>}
  */
-const remarkSmartypants = options => {
+export default function remarkSmartypants(options) {
   const processor = retext().use(smartypants, options)
   const transformer = tree => {
     visit(tree, 'text', node => {
@@ -21,5 +21,3 @@ const remarkSmartypants = options => {
   }
   return transformer
 }
-
-export default remarkSmartypants
