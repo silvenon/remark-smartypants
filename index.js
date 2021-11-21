@@ -1,8 +1,18 @@
-const retext = require('retext')
-const visit = require('unist-util-visit')
-const smartypants = require('retext-smartypants')
+/**
+ * @typedef {import('mdast').Root} Root
+ * @typedef {import('retext-smartypants').Options} Options
+ */
 
-const remarkSmartypants = options => {
+import { retext } from 'retext'
+import { visit } from 'unist-util-visit'
+import smartypants from 'retext-smartypants'
+
+/**
+ * remark plugin to implement SmartyPants.
+ *
+ * @type {import('unified').Plugin<[Options?] | void[], Root>}
+ */
+export default function remarkSmartypants(options) {
   const processor = retext().use(smartypants, options)
   const transformer = tree => {
     visit(tree, 'text', node => {
@@ -11,5 +21,3 @@ const remarkSmartypants = options => {
   }
   return transformer
 }
-
-module.exports = remarkSmartypants
