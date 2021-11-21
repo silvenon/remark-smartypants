@@ -42,11 +42,11 @@
   ],
   "scripts": {
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
-    "prepublishOnly": "yarn test"
+    "prepublishOnly": "npm test"
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn test"
+      "pre-push": "npm test"
     }
   },
   "dependencies": {

@@ -16,7 +16,7 @@ jobs:
         node-version: 12.x.x
     - name: Run scripts
       run: |
-        yarn
-        yarn test --colors
+        npm install
+        npm test -- --colors
       env:
         CI: true
