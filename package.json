@@ -41,13 +41,9 @@
     "smart"
   ],
   "scripts": {
+    "prepare": "husky install",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
     "prepublishOnly": "npm test"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm test"
-    }
   },
   "dependencies": {
     "retext": "^8.1.0",
