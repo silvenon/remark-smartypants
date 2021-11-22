@@ -1,32 +1,30 @@
 # @silvenon/remark-smartypants
 
-[remark] plugin to implement [SmartyPants].
+[remark] plugin to implement [SmartyPants]. Now with 100% more ESM!
 
 ```sh
 npm install @silvenon/remark-smartypants
 ```
 
 ```js
-const remark = require('remark')
-const smartypants = require('@silvenon/remark-smartypants')
+import remark from 'remark'
+import smartypants from '@silvenon/remark-smartypants'
 
-const content = remark()
+const result = await remark()
   .use(smartypants)
-  .processSync('# "Hello World!"')
+  .process('# <<Hello World!>>')
 
-console.log(String(content))
-// # “Hello World!”
-// (notice smart quotes)
+console.log(String(result))
+// # «Hello World!»
 ```
 
-"Why?" I hear nobody ask. Because I wanted to implement SmartyPants in [MDX]:
+I created this plugin because I wanted to add SmartyPants to [MDX]:
 
 ```js
-const mdx = require('@mdx-js/mdx')
-const smartypants = require('@silvenon/remark-smartypants')
+import mdx from '@mdx-js/mdx'
+import smartypants from '@silvenon/remark-smartypants'
 
-// let's pretend that support for top-level async/await exists...
-const result = await mdx('# "Hello World!"', {
+const result = await mdx('# <<Hello World!>>', {
   remarkPlugins: [
     smartypants,
   ],
@@ -36,9 +34,9 @@ const result = await mdx('# "Hello World!"', {
 This plugin uses [retext-smartypants](https://github.com/retextjs/retext-smartypants) under the hood, so it takes the same options:
 
 ```js
-const content = remark()
+const result = await remark()
   .use(smartypants, { dashes: 'oldschool' })
-  .processSync('en dash (--), em dash (---)')
+  .process('en dash (--), em dash (---)')
 ```
 
 [remark]: https://remark.js.org
