@@ -1,14 +1,14 @@
-# @silvenon/remark-smartypants
+# remark-smartypants
 
 [remark] plugin to implement [SmartyPants]. Now with 100% more ESM!
 
 ```sh
-npm install @silvenon/remark-smartypants
+npm install remark-smartypants
 ```
 
 ```js
 import remark from 'remark'
-import smartypants from '@silvenon/remark-smartypants'
+import smartypants from 'remakr-smartypants'
 
 const result = await remark()
   .use(smartypants)
@@ -22,7 +22,7 @@ I created this plugin because I wanted to add SmartyPants to [MDX]:
 
 ```js
 import mdx from '@mdx-js/mdx'
-import smartypants from '@silvenon/remark-smartypants'
+import smartypants from 'remark-smartypants'
 
 const result = await mdx('# <<Hello World!>>', {
   remarkPlugins: [

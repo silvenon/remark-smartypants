@@ -1,10 +1,10 @@
 import { remark } from "remark";
 import smartypants from "./";
 
-it("implements SmartyPants", () => {
-  const file = remark()
+it("implements SmartyPants", async () => {
+  const file = await remark()
     .use(smartypants)
-    .processSync('# "Hello World!"');
+    .process('# "Hello World!"');
   expect(String(file)).toMatchInlineSnapshot(`
     "# “Hello World!”
     "

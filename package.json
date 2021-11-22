@@ -1,5 +1,5 @@
 {
-  "name": "@silvenon/remark-smartypants",
+  "name": "remark-smartypants",
   "description": "remark plugin to implement SmartyPants",
   "version": "2.0.0",
   "license": "MIT",
@@ -12,10 +12,6 @@
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
   },
   "repository": {
     "type": "git",
