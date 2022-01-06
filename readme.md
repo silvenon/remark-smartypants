@@ -21,7 +21,7 @@ Example using [remark]:
 
 ```js
 import remark from 'remark'
-import smartypants from 'remakr-smartypants'
+import smartypants from 'remark-smartypants'
 
 const result = await remark()
   .use(smartypants)
