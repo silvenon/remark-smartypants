@@ -37,12 +37,14 @@ I created this plugin because I wanted to add SmartyPants to [MDX]:
 import mdx from '@mdx-js/mdx'
 import smartypants from 'remark-smartypants'
 
-const result = await mdx('# <<Hello World!>>', {
+const result = await mdx('# ---Hello World!---', {
   remarkPlugins: [
     smartypants,
   ],
 })
 ```
+
+Note that angle quotes in the former example (`<<...>>`) are probably impossible in MDX because there they are invalid syntax.
 
 This plugin uses [retext-smartypants](https://github.com/retextjs/retext-smartypants) under the hood, so it takes the same options:
 
