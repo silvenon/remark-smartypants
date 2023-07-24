@@ -37,9 +37,12 @@
     "smart"
   ],
   "scripts": {
-    "prepare": "husky install",
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+    "setup": "simple-git-hooks",
+    "test": "vitest run",
     "prepublishOnly": "npm test"
+  },
+  "simple-git-hooks": {
+    "pre-push": "npm test"
   },
   "dependencies": {
     "retext": "^8.1.0",
@@ -47,10 +50,9 @@
     "unist-util-visit": "^4.1.0"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3",
-    "husky": "^7.0.4",
-    "jest": "^27.3.1",
     "prettier": "^2.4.1",
-    "remark": "^14.0.2"
+    "remark": "^14.0.2",
+    "simple-git-hooks": "^2.9.0",
+    "vitest": "^0.33.0"
   }
 }

@@ -1,3 +1,4 @@
+import { it, expect } from "vitest";
 import { remark } from "remark";
 import smartypants from "./";
 
