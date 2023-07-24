@@ -46,12 +46,12 @@
   },
   "dependencies": {
     "retext": "^8.1.0",
-    "retext-smartypants": "^5.1.0",
-    "unist-util-visit": "^4.1.0"
+    "retext-smartypants": "^5.2.0",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "prettier": "^2.4.1",
-    "remark": "^14.0.2",
+    "prettier": "^3.0.0",
+    "remark": "^14.0.3",
     "simple-git-hooks": "^2.9.0",
     "vitest": "^0.33.0"
   }
