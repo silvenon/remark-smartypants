@@ -20,28 +20,24 @@ yarn add remark-smartypants
 Example using [remark]:
 
 ```js
-import remark from 'remark'
-import smartypants from 'remark-smartypants'
+import remark from "remark";
+import smartypants from "remark-smartypants";
 
-const result = await remark()
-  .use(smartypants)
-  .process('# <<Hello World!>>')
+const result = await remark().use(smartypants).process("# <<Hello World!>>");
 
-console.log(String(result))
+console.log(String(result));
 // # «Hello World!»
 ```
 
 I created this plugin because I wanted to add SmartyPants to [MDX]:
 
 ```js
-import mdx from '@mdx-js/mdx'
-import smartypants from 'remark-smartypants'
+import mdx from "@mdx-js/mdx";
+import smartypants from "remark-smartypants";
 
-const result = await mdx('# ---Hello World!---', {
-  remarkPlugins: [
-    smartypants,
-  ],
-})
+const result = await mdx("# ---Hello World!---", {
+  remarkPlugins: [smartypants],
+});
 ```
 
 Note that angle quotes in the former example (`<<...>>`) are probably impossible in MDX because there they are invalid syntax.
@@ -50,8 +46,8 @@ This plugin uses [retext-smartypants](https://github.com/retextjs/retext-smartyp
 
 ```js
 const result = await remark()
-  .use(smartypants, { dashes: 'oldschool' })
-  .process('en dash (--), em dash (---)')
+  .use(smartypants, { dashes: "oldschool" })
+  .process("en dash (--), em dash (---)");
 ```
 
 ## License

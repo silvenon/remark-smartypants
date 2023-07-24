@@ -11,13 +11,13 @@ jobs:
     name: Vitest
     runs-on: ubuntu-latest
     steps:
-    - name: Check out repository
-      uses: actions/checkout@v3
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version-file: package.json
-    - name: Install dependencies
-      run: npm ci
-    - name: Run tests
-      run: npm test
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: package.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm test

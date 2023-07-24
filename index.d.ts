@@ -11,5 +11,5 @@ import { Root } from "mdast";
 export { Options };
 
 export default function remarkSmartypants(
-  options?: void | Options
+  options?: void | Options,
 ): void | Transformer<Root, Root>;
