@@ -1,15 +1,20 @@
 /**
- * remark plugin to implement SmartyPants.
+ * Remark plugin to implement SmartyPants.
  *
- * @type {import('unified').Plugin<[Options?] | void[], Root>}
+ * @type {import('unified').Plugin<[Options?], Root>}
  */
-
-import { Options } from "retext-smartypants";
-import { Transformer } from "unified";
+import type { Options as SmartypantsOptions } from "retext-smartypants";
+import type { Transformer } from "unified";
 import { Root } from "mdast";
 
-export { Options };
+export { SmartypantsOptions };
 
+/**
+ * Applies SmartyPants transformation to a Markdown Abstract Syntax Tree (MDAST).
+ *
+ * @param {SmartypantsOptions?} options - Configuration options for SmartyPants.
+ * @returns {Transformer<Root, Root>?} - A transformer for the MDAST.
+ */
 export default function remarkSmartypants(
-  options?: void | Options
-): void | Transformer<Root, Root>;
+  options?: SmartypantsOptions
+): Transformer<Root, Root> | undefined;
