@@ -1,7 +1,7 @@
 {
   "name": "remark-smartypants",
   "description": "remark plugin to implement SmartyPants",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "license": "MIT",
   "files": [
     "index.js",
@@ -11,7 +11,7 @@
   "types": "./index.d.ts",
   "type": "module",
   "engines": {
-    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+    "node": ">=16.0.0"
   },
   "repository": {
     "type": "git",
@@ -42,15 +42,16 @@
     "prepublishOnly": "npm test"
   },
   "dependencies": {
-    "retext": "^8.1.0",
-    "retext-smartypants": "^5.1.0",
-    "unist-util-visit": "^4.1.0"
+    "retext": "^9.0.0",
+    "retext-smartypants": "^6.0.0",
+    "unified": "^11.0.4",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "husky": "^7.0.4",
-    "jest": "^27.3.1",
-    "prettier": "^2.4.1",
-    "remark": "^14.0.2"
+    "husky": "^8.0.3",
+    "jest": "^29.7.0",
+    "prettier": "^3.0.3",
+    "remark": "^15.0.1"
   }
 }
