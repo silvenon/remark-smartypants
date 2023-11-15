@@ -10,14 +10,11 @@ it("implements SmartyPants", async () => {
   `);
 });
 
-it.skip("handles quotes around links", async () => {
+it.todo("handles quotes around links", async () => {
   const file = await remark()
     .use(smartypants)
     .process('"wow". go to "[google](https://www.google.com/)" today.');
   expect(String(file)).toMatchInlineSnapshot(`
-    "“wow”. go to “
-    [google](https://www.google.com/)
-    ” today.
-    "
+    "“wow”. go to “[google](https://www.google.com/)” today."
   `);
 });
