@@ -13,33 +13,39 @@ import smartypants from "retext-smartypants";
  * @type {import("unified").Plugin<[Options?] | void[], Root>}
  */
 export default function remarkSmartypants(options) {
-  const processor = retext().use(smartypants, options);
+  const processor = retext().use(smartypants, {
+    ...options,
+    // Do not replace ellipses and dashes and backticks because they change
+    // string length, and we couldn't guarantee right splice of text in second
+    // visit of tree
+    ellipses: false,
+    dashes: false,
+    backticks: false,
+  });
+
+  const processor2 = retext().use(smartypants, {
+    ...options,
+    // Do not replace quotes because they are already replaced in the first
+    quotes: false,
+  });
 
   return (tree) => {
-    visit(tree, "text", (node, index, parent) => {
-      node.value = processor.processSync(node.value).value;
+    let allText = "";
+    let startIndex = 0;
 
-      const prevNode = parent.children[index - 1];
-      const beforePrevNode = parent.children[index - 2];
+    visit(tree, "text", (node) => {
+      allText += node.value;
+    });
 
-      // Check for quotes between links
-      if (
-        prevNode &&
-        prevNode.type === "link" &&
-        beforePrevNode &&
-        beforePrevNode.type === "text"
-      ) {
-        const SINGLE_QUOTE = ["‘", "’"];
-        const DOUBLE_QUOTE = ["“", "”"];
-        const beforePrevText = beforePrevNode.value;
+    // Concat all text into one string, to properly replace quotes around links
+    // and bold text
+    allText = processor.processSync(allText).value;
 
-        for (const [startQuote, endQuote] of [SINGLE_QUOTE, DOUBLE_QUOTE]) {
-          if (node.value[0] === endQuote && beforePrevText.endsWith(endQuote)) {
-            beforePrevNode.value = beforePrevText.slice(0, -1) + startQuote;
-            break; // replaced, skip other checks
-          }
-        }
-      }
+    visit(tree, "text", (node) => {
+      const endIndex = startIndex + node.value.length;
+      const processedText = allText.slice(startIndex, endIndex);
+      node.value = processor2.processSync(processedText).value;
+      startIndex = endIndex;
     });
   };
 }

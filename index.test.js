@@ -19,3 +19,13 @@ it("handles quotes around links", async () => {
     "
   `);
 });
+
+it("handles quotes around bold text", async () => {
+  const file = await remark()
+    .use(smartypants)
+    .process(`foo '**Bolded -- \`\`part** of --- this quote' bar`);
+  expect(file.value).toMatchInlineSnapshot(`
+    "foo ‘**Bolded — “part** of --- this quote’ bar
+    "
+  `);
+});
