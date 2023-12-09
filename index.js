@@ -31,10 +31,9 @@ export default function remarkSmartypants(options) {
       ) {
         const SINGLE_QUOTE = ["‘", "’"];
         const DOUBLE_QUOTE = ["“", "”"];
+        const beforePrevText = beforePrevNode.value;
 
         for (const [startQuote, endQuote] of [SINGLE_QUOTE, DOUBLE_QUOTE]) {
-          const beforePrevText = beforePrevNode.value;
-
           if (node.value[0] === endQuote && beforePrevText.endsWith(endQuote)) {
             beforePrevNode.value = beforePrevText.slice(0, -1) + startQuote;
             break; // replaced, skip other checks
