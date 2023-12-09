@@ -26,6 +26,7 @@ export default function remarkSmartypants(options) {
   const processor2 = retext().use(smartypants, {
     ...options,
     // Do not replace quotes because they are already replaced in the first
+    // processor
     quotes: false,
   });
 
