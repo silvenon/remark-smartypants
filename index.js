@@ -15,9 +15,9 @@ import smartypants from "retext-smartypants";
 export default function remarkSmartypants(options) {
   const processor = retext().use(smartypants, {
     ...options,
-    // Do not replace ellipses and dashes and backticks because they change
-    // string length, and we couldn't guarantee right splice of text in second
-    // visit of tree
+    // Do not replace ellipses, dashes, backticks because they change string
+    // length, and we couldn't guarantee right splice of text in second visit of
+    // tree
     ellipses: false,
     dashes: false,
     backticks: false,
