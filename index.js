@@ -35,7 +35,7 @@ export default function remarkSmartypants(options) {
     let startIndex = 0;
     const nodes = []
 
-    visit(tree, ["text", 'inlineCode'], (node) => {
+    visit(tree, ["text", "inlineCode"], (node) => {
       allText += node.value;
       nodes.push(node)
     });
