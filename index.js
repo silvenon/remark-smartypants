@@ -8,7 +8,7 @@ import { visit } from "unist-util-visit";
 import smartypants from "retext-smartypants";
 
 /**
- * Remark plugin to implement SmartyPants.
+ * remark plugin to implement SmartyPants.
  *
  * @type {import("unified").Plugin<[Options?] | void[], Root>}
  */
