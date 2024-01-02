@@ -10,7 +10,7 @@ import smartypants from "retext-smartypants";
 /**
  * remark plugin to implement SmartyPants.
  *
- * @type {import("unified").Plugin<[Options?] | void[], Root>}
+ * @type {import('unified').Plugin<[Options?] | void[], Root>}
  */
 export default function remarkSmartypants(options) {
   const processor = retext().use(smartypants, {
