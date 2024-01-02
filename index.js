@@ -1,5 +1,5 @@
 /**
- * @typedef {import("mdast").Root} Root
+ * @typedef {import('mdast').Root} Root
  * @typedef {import("retext-smartypants").Options} Options
  */
 
