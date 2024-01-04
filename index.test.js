@@ -42,31 +42,25 @@ describe("handles quotes around inline code", async () => {
   });
   it("around inline code and text", async () => {
     const file = await process(`"\`single 'quote'. . .\` baz"`);
-    expect(file.value).toMatchInlineSnapshot(
-      `
+    expect(file.value).toMatchInlineSnapshot(`
       "“\`single 'quote'. . .\` baz”
       "
-    `,
-    );
+    `);
   });
 
   it("around inline code with single quote", async () => {
     const file = await process("'`singles'`'");
-    expect(file.value).toMatchInlineSnapshot(
-      `
+    expect(file.value).toMatchInlineSnapshot(`
       "‘\`singles'\`’
       "
-    `,
-    );
+    `);
   });
 
   it("around inline code with double quote", async () => {
     const file = await process('"`double"`"');
-    expect(file.value).toMatchInlineSnapshot(
-      `
+    expect(file.value).toMatchInlineSnapshot(`
       "“\`double"\`”
       "
-    `,
-    );
+    `);
   });
 });
