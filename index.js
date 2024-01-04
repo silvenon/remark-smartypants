@@ -33,11 +33,12 @@ export default function remarkSmartypants(options) {
   return (tree) => {
     let allText = "";
     let startIndex = 0;
-    const nodes = []
+    const nodes = [];
 
     visit(tree, ["text", "inlineCode"], (node) => {
-      allText += node.value;
-      nodes.push(node)
+      allText +=
+        node.type === "text" ? node.value : "A".repeat(node.value.length);
+      nodes.push(node);
     });
 
     // Concat all text into one string, to properly replace quotes around links
@@ -46,11 +47,11 @@ export default function remarkSmartypants(options) {
 
     for (const node of nodes) {
       const endIndex = startIndex + node.value.length;
-      const processedText = allText.slice(startIndex, endIndex);
-      startIndex = endIndex;
-      if (node.type !== 'inlineCode') {
+      if (node.type === "text") {
+        const processedText = allText.slice(startIndex, endIndex);
         node.value = processor2.processSync(processedText).value;
       }
+      startIndex = endIndex;
     }
   };
 }
