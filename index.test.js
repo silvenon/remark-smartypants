@@ -64,7 +64,7 @@ describe("handles quotes around inline code", async () => {
     const file = await process('"`double"`"');
     expect(file.value).toMatchInlineSnapshot(
       `
-      "“\`double\\"\`”
+      "“\`double"\`”
       "
     `,
     );
