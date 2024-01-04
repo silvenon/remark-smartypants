@@ -7,6 +7,20 @@ on:
   pull_request: {}
 
 jobs:
+  prettier:
+    name: Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: package.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Prettier
+        run: npx prettier --check .
   vitest:
     name: Vitest
     runs-on: ubuntu-latest
