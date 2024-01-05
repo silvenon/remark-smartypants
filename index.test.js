@@ -60,18 +60,18 @@ describe("handles quotes around inline code", async () => {
   });
 });
 
-describe("should ignore parent", () => {
+describe("should ignore parent nodes", () => {
   const mdxCompiler = remark().use(remarkMdx).use(remarkSmartypants);
   const process = mdxCompiler.process.bind(mdxCompiler);
 
-  it("should ignore `<style>`", async () => {
+  it("<style>", async () => {
     const file = await process(`<style>html:after \\{ content: '""' }</style>`);
     expect(file.value).toMatchInlineSnapshot(`
       "<style>html:after \\{ content: '""' }</style>
       "
     `);
   });
-  it("should ignore `<script>`", async () => {
+  it("<script>", async () => {
     const file = await process('<script>console.log("foo")</script>');
     expect(file.value).toMatchInlineSnapshot(`
       "<script>console.log("foo")</script>
