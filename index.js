@@ -7,6 +7,18 @@ import { retext } from "retext";
 import { visit } from "unist-util-visit";
 import smartypants from "retext-smartypants";
 
+const VISITED_NODES = new Set(["text", "inlineCode"]);
+
+const IGNORED_HTML_ELEMENTS = new Set(["style", "script"]);
+
+function check(node, index, parent) {
+  return (
+    VISITED_NODES.has(node.type) &&
+    (parent.type !== "mdxJsxTextElement" ||
+      !IGNORED_HTML_ELEMENTS.has(parent.name))
+  );
+}
+
 /**
  * remark plugin to implement SmartyPants.
  *
@@ -35,7 +47,7 @@ export default function remarkSmartypants(options) {
     let startIndex = 0;
     const nodes = [];
 
-    visit(tree, ["text", "inlineCode"], (node) => {
+    visit(tree, check, (node) => {
       allText +=
         node.type === "text" ? node.value : "A".repeat(node.value.length);
       nodes.push(node);
