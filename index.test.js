@@ -65,17 +65,13 @@ describe("should ignore parent nodes", () => {
   const process = mdxCompiler.process.bind(mdxCompiler);
 
   it("<style>", async () => {
-    const file = await process(`<style>html:after \\{ content: '""' }</style>`);
-    expect(file.value).toMatchInlineSnapshot(`
-      "<style>html:after \\{ content: '""' }</style>
-      "
-    `);
+    const mdxContent = `<style>html:after \\{ content: '""' }</style>`;
+    const file = await process(mdxContent);
+    expect(file.value.trimEnd()).toBe(mdxContent);
   });
   it("<script>", async () => {
-    const file = await process('<script>console.log("foo")</script>');
-    expect(file.value).toMatchInlineSnapshot(`
-      "<script>console.log("foo")</script>
-      "
-    `);
+    const mdxContent = '<script>console.log("foo")</script>';
+    const file = await process(mdxContent);
+    expect(file.value.trimEnd()).toBe(mdxContent);
   });
 });
