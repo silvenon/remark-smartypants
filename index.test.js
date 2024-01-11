@@ -1,8 +1,10 @@
 import { it, expect, describe } from "vitest";
 import { remark } from "remark";
-import smartypants from "./";
+import remarkMdx from "remark-mdx";
+import remarkSmartypants from "./";
 
-const { process } = remark().use(smartypants);
+const compiler = remark().use(remarkSmartypants);
+const process = compiler.process.bind(compiler);
 
 it("implements SmartyPants", async () => {
   const file = await process('# "Hello World!"');
@@ -55,5 +57,21 @@ describe("handles quotes around inline code", async () => {
     expect(file.value).toMatchInlineSnapshot(`
       "“\`double"\`”
       "`);
+  });
+});
+
+describe("should ignore parent nodes", () => {
+  const mdxCompiler = remark().use(remarkMdx).use(remarkSmartypants);
+  const process = mdxCompiler.process.bind(mdxCompiler);
+
+  it("<style>", async () => {
+    const mdxContent = `<style>html:after \\{ content: '""' }</style>`;
+    const file = await process(mdxContent);
+    expect(file.value.trimEnd()).toBe(mdxContent);
+  });
+  it("<script>", async () => {
+    const mdxContent = '<script>console.log("foo")</script>';
+    const file = await process(mdxContent);
+    expect(file.value.trimEnd()).toBe(mdxContent);
   });
 });
