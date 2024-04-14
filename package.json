@@ -11,7 +11,7 @@
   "types": "./index.d.ts",
   "type": "module",
   "engines": {
-    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+    "node": ">=16.0.0"
   },
   "repository": {
     "type": "git",
@@ -52,8 +52,9 @@
   },
   "prettier": {},
   "dependencies": {
-    "retext": "^8.1.0",
-    "retext-smartypants": "^5.2.0",
+    "retext": "^9.0.0",
+    "retext-smartypants": "^6.0.0",
+    "unified": "^11.0.4",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
