@@ -4,11 +4,10 @@
   "version": "2.2.0",
   "license": "MIT",
   "files": [
-    "index.js",
-    "index.d.ts"
+    "./dist"
   ],
-  "exports": "./index.js",
-  "types": "./index.d.ts",
+  "exports": "./dist/plugin.js",
+  "types": "./dist/plugin.d.ts",
   "type": "module",
   "engines": {
     "node": ">=16.0.0"
@@ -38,7 +37,8 @@
   ],
   "scripts": {
     "test": "vitest run",
-    "prepublishOnly": "npm test"
+    "build": "tsc --build",
+    "prepublishOnly": "npm test && npm run build"
   },
   "dependencies": {
     "retext": "^9.0.0",
@@ -47,10 +47,13 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
+    "@types/unist": "^3.0.2",
     "lefthook": "^1.6.10",
     "prettier": "^3.2.5",
     "remark": "^15.0.1",
     "remark-mdx": "^3.0.1",
+    "typescript": "^5.4.5",
+    "unist-util-is": "^6.0.0",
     "vitest": "^1.5.0"
   }
 }

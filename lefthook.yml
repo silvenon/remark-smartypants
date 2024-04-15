@@ -11,3 +11,5 @@ pre-push:
   commands:
     test:
       run: npm test
+    typescript:
+      run: npx tsc --build

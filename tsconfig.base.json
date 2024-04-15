@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "Node16",
+    "esModuleInterop": true,
+    "target": "ES2021",
+    "lib": ["ES2021"],
+    "skipLibCheck": true,
+    "strict": true
+  }
+}
