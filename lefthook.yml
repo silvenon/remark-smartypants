@@ -1,0 +1,13 @@
+pre-commit:
+  piped: true
+  commands:
+    prettier:
+      priority: 1
+      run: npx prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true
+
+pre-push:
+  parallel: true
+  commands:
+    test:
+      run: npm test

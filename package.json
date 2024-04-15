@@ -37,20 +37,9 @@
     "smart"
   ],
   "scripts": {
-    "setup": "npm install && simple-git-hooks",
     "test": "vitest run",
     "prepublishOnly": "npm test"
   },
-  "simple-git-hooks": {
-    "pre-commit": "npx nano-staged",
-    "pre-push": "npm test"
-  },
-  "nano-staged": {
-    "*.{js,ts,json}": [
-      "prettier --write"
-    ]
-  },
-  "prettier": {},
   "dependencies": {
     "retext": "^9.0.0",
     "retext-smartypants": "^6.0.0",
@@ -58,11 +47,10 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "nano-staged": "^0.8.0",
+    "lefthook": "^1.6.10",
     "prettier": "^3.2.5",
     "remark": "^15.0.1",
     "remark-mdx": "^3.0.1",
-    "simple-git-hooks": "^2.9.0",
     "vitest": "^1.5.0"
   }
 }
