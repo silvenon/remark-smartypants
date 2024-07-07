@@ -60,6 +60,13 @@ describe("handles quotes around inline code", async () => {
   });
 });
 
+it("handles quotes after blockquotes", async () => {
+  const file = await process('> blockquote \n\n"after blockquote"');
+  expect(file.toString()).toMatchInlineSnapshot(`
+    "> blockquote \n\n“after blockquote”"
+    "`);
+});
+
 describe("should ignore parent nodes", () => {
   const mdxCompiler = remark().use(remarkMdx).use(remarkSmartypants);
   const process = mdxCompiler.process.bind(mdxCompiler);
