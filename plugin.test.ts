@@ -61,9 +61,9 @@ describe("handles quotes around inline code", async () => {
 });
 
 it("handles quotes after blockquotes", async () => {
-  const file = await process('> blockquote \n\n"after blockquote"');
+  const file = await process('> blockquote\n\n"after blockquote"');
   expect(file.toString()).toMatchInlineSnapshot(`
-    "> blockquote \n\n“after blockquote”"
+    "> blockquote\n\n“after blockquote”
     "`);
 });
 
