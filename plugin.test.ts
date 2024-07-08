@@ -74,6 +74,13 @@ describe("handles quotes at the start of a paragraph", () => {
       "> blockquote\n\n“after blockquote”
       "`);
   });
+
+  it("within a blockquote", async () => {
+    const file = await process('> blockquote\n>\n> "within blockquote"');
+    expect(file.toString()).toMatchInlineSnapshot(`
+      "> blockquote\n>\n> “within blockquote”
+      "`);
+  });
 });
 
 describe("should ignore parent nodes", () => {
