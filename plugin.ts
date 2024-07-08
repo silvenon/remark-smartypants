@@ -5,7 +5,7 @@ import type { Plugin } from "unified";
 import type { Test } from "unist-util-is";
 import type { Node } from "unist";
 
-const VISITED_NODES = new Set(["text", "inlineCode"]);
+const VISITED_NODES = new Set(["text", "inlineCode", "paragraph"]);
 
 const IGNORED_HTML_ELEMENTS = new Set(["style", "script"]);
 
@@ -17,7 +17,7 @@ const check: Test = (node, index, parent) => {
         typeof parent.name === "string" &&
         !IGNORED_HTML_ELEMENTS.has(parent.name))) &&
     VISITED_NODES.has(node.type) &&
-    isLiteral(node)
+    (isLiteral(node) || isParagraph(node))
   );
 };
 
@@ -45,12 +45,18 @@ const remarkSmartypants: Plugin<[Options?]> = (options) => {
   return (tree) => {
     let allText = "";
     let startIndex = 0;
-    const nodes: Literal[] = [];
+    const nodes: (Literal | Paragraph)[] = [];
 
     visit(tree, check, (node) => {
-      if (!isLiteral(node)) return;
-      allText +=
-        node.type === "text" ? node.value : "A".repeat(node.value.length);
+      if (isLiteral(node)) {
+        allText +=
+          node.type === "text" ? node.value : "A".repeat(node.value.length);
+      } else if (isParagraph(node)) {
+        // Inject a "fake" space because otherwise, when concatenated below,
+        // smartypants will fail to recognize opening quotes at the start of
+        // paragraphs
+        allText += " ";
+      }
       nodes.push(node);
     });
 
@@ -59,12 +65,17 @@ const remarkSmartypants: Plugin<[Options?]> = (options) => {
     allText = processor.processSync(allText).toString();
 
     for (const node of nodes) {
-      const endIndex = startIndex + node.value.length;
-      if (node.type === "text") {
-        const processedText = allText.slice(startIndex, endIndex);
-        node.value = processor2.processSync(processedText).toString();
+      if (isLiteral(node)) {
+        const endIndex = startIndex + node.value.length;
+        if (node.type === "text") {
+          const processedText = allText.slice(startIndex, endIndex);
+          node.value = processor2.processSync(processedText).toString();
+        }
+        startIndex = endIndex;
+      } else if (isParagraph(node)) {
+        // Skip over the space we added above
+        startIndex += 1;
       }
-      startIndex = endIndex;
     }
   };
 };
@@ -76,6 +87,12 @@ interface Literal extends Node {
 
 function isLiteral(node: Node): node is Literal {
   return "value" in node && typeof node.value === "string";
+}
+
+interface Paragraph extends Node {}
+
+function isParagraph(node: Node): node is Paragraph {
+  return node.type === "paragraph";
 }
 
 export default remarkSmartypants;
