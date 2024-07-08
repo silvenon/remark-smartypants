@@ -60,25 +60,39 @@ describe("handles quotes around inline code", async () => {
   });
 });
 
-describe("handles quotes at the start of a paragraph", () => {
-  it("after paragraphs", async () => {
+describe("handles quotes at the edges of a paragraph", () => {
+  it("at start after another paragraph", async () => {
     const file = await process('paragraph\n\n"after paragraph"');
     expect(file.toString()).toMatchInlineSnapshot(`
       "paragraph\n\n“after paragraph”
       "`);
   });
 
-  it("after a blockquote", async () => {
+  it("at start after a blockquote", async () => {
     const file = await process('> blockquote\n\n"after blockquote"');
     expect(file.toString()).toMatchInlineSnapshot(`
       "> blockquote\n\n“after blockquote”
       "`);
   });
 
-  it("within a blockquote", async () => {
+  it("at start within a blockquote", async () => {
     const file = await process('> blockquote\n>\n> "within blockquote"');
     expect(file.toString()).toMatchInlineSnapshot(`
       "> blockquote\n>\n> “within blockquote”
+      "`);
+  });
+
+  it("at end before another paragraph", async () => {
+    const file = await process('"before paragraph"\n\nparagraph');
+    expect(file.toString()).toMatchInlineSnapshot(`
+      "“before paragraph”\n\nparagraph
+      "`);
+  });
+
+  it("at end before a blockquote", async () => {
+    const file = await process('"before blockquote"\n\n> blockquote');
+    expect(file.toString()).toMatchInlineSnapshot(`
+      "“before blockquote”\n\n> blockquote
       "`);
   });
 });
