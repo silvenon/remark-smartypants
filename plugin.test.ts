@@ -60,11 +60,20 @@ describe("handles quotes around inline code", async () => {
   });
 });
 
-it("handles quotes after blockquotes", async () => {
-  const file = await process('> blockquote\n\n"after blockquote"');
-  expect(file.toString()).toMatchInlineSnapshot(`
-    "> blockquote\n\n“after blockquote”
-    "`);
+describe("handles quotes at the start of a paragraph", () => {
+  it("after paragraphs", async () => {
+    const file = await process('paragraph\n\n"after paragraph"');
+    expect(file.toString()).toMatchInlineSnapshot(`
+      "paragraph\n\n“after paragraph”
+      "`);
+  });
+
+  it("after a blockquote", async () => {
+    const file = await process('> blockquote\n\n"after blockquote"');
+    expect(file.toString()).toMatchInlineSnapshot(`
+      "> blockquote\n\n“after blockquote”
+      "`);
+  });
 });
 
 describe("should ignore parent nodes", () => {
