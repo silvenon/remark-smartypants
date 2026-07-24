@@ -5,7 +5,13 @@ import type { Plugin } from "unified";
 import type { Test } from "unist-util-is";
 import type { Node } from "unist";
 
-const VISITED_NODES = new Set(["text", "inlineCode", "paragraph"]);
+const VISITED_NODES = new Set([
+  "text",
+  "inlineCode",
+  "paragraph",
+  "heading",
+  "tableCell",
+]);
 
 const IGNORED_HTML_ELEMENTS = new Set(["style", "script"]);
 
@@ -17,7 +23,7 @@ const check: Test = (node, index, parent) => {
         typeof parent.name === "string" &&
         !IGNORED_HTML_ELEMENTS.has(parent.name))) &&
     VISITED_NODES.has(node.type) &&
-    (isLiteral(node) || isParagraph(node))
+    (isLiteral(node) || isBlock(node))
   );
 };
 
@@ -45,16 +51,16 @@ const remarkSmartypants: Plugin<[Options?]> = (options) => {
   return (tree) => {
     let allText = "";
     let startIndex = 0;
-    const nodes: (Literal | Paragraph)[] = [];
+    const nodes: (Literal | Node)[] = [];
 
     visit(tree, check, (node) => {
       if (isLiteral(node)) {
         allText +=
           node.type === "text" ? node.value : "A".repeat(node.value.length);
-      } else if (isParagraph(node)) {
+      } else if (isBlock(node)) {
         // Inject a "fake" space because otherwise, when concatenated below,
         // smartypants will fail to recognize opening quotes at the start of
-        // paragraphs
+        // blocks
         allText += " ";
       }
       nodes.push(node);
@@ -72,7 +78,7 @@ const remarkSmartypants: Plugin<[Options?]> = (options) => {
           node.value = processor2.processSync(processedText).toString();
         }
         startIndex = endIndex;
-      } else if (isParagraph(node)) {
+      } else if (isBlock(node)) {
         // Skip over the space we added above
         startIndex += 1;
       }
@@ -89,10 +95,15 @@ function isLiteral(node: Node): node is Literal {
   return "value" in node && typeof node.value === "string";
 }
 
-interface Paragraph extends Node {}
+// Nodes whose text starts fresh: a quote right at their start is always an
+// opening quote, so they get a synthetic space in the concatenation. These are
+// mdast's block-level phrasing-content parents; inline phrasing parents
+// (emphasis, strong, link, ...) must NOT be included, because quote pairing
+// within a sentence relies on seamless concatenation across them.
+const BLOCK_NODES = new Set(["paragraph", "heading", "tableCell"]);
 
-function isParagraph(node: Node): node is Paragraph {
-  return node.type === "paragraph";
+function isBlock(node: Node): boolean {
+  return BLOCK_NODES.has(node.type);
 }
 
 export default remarkSmartypants;

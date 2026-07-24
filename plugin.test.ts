@@ -1,5 +1,6 @@
 import { it, expect, describe } from "vitest";
 import { remark } from "remark";
+import remarkGfm from "remark-gfm";
 import remarkMdx from "remark-mdx";
 import remarkSmartypants from "./plugin.ts";
 
@@ -93,6 +94,36 @@ describe("handles quotes at the edges of a paragraph", () => {
     const file = await process('"before blockquote"\n\n> blockquote');
     expect(file.toString()).toMatchInlineSnapshot(`
       "“before blockquote”\n\n> blockquote
+      "`);
+  });
+});
+
+describe("handles quotes at the start of a heading", () => {
+  it("after a paragraph", async () => {
+    const file = await process('paragraph.\n\n## "after paragraph"');
+    expect(file.toString()).toMatchInlineSnapshot(`
+      "paragraph.\n\n## “after paragraph”
+      "`);
+  });
+
+  it("after another heading", async () => {
+    const file = await process('# heading\n\n## "after heading"');
+    expect(file.toString()).toMatchInlineSnapshot(`
+      "# heading\n\n## “after heading”
+      "`);
+  });
+});
+
+describe("handles quotes at the edges of table cells", () => {
+  const gfmCompiler = remark().use(remarkGfm).use(remarkSmartypants);
+  const process = gfmCompiler.process.bind(gfmCompiler);
+
+  it("quoted cells after other text", async () => {
+    const file = await process(
+      'paragraph.\n\n| a | b |\n| - | - |\n| "x" | "y" |',
+    );
+    expect(file.toString()).toMatchInlineSnapshot(`
+      "paragraph.\n\n| a   | b   |\n| --- | --- |\n| “x” | “y” |
       "`);
   });
 });
