@@ -52,6 +52,7 @@
     "lefthook": "^1.6.10",
     "prettier": "^3.2.5",
     "remark": "^15.0.1",
+    "remark-gfm": "^4.0.1",
     "remark-mdx": "^3.0.1",
     "typescript": "^5.4.5",
     "unist-util-is": "^6.0.0",
